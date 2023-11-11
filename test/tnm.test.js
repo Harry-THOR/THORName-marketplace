@@ -12,8 +12,8 @@ describe("THORName Marketplace", () => {
 
     // get signers / set up accounts
     [deployer, buyer] = await ethers.getSigners();
-    console.log("Deployer address: ", deployer.address);
-    console.log("Buyer address: ", buyer.address);
+    //console.log("Deployer address: ", deployer.address);
+    //console.log("Buyer address: ", buyer.address);
 
     // deploy contract
     const Tnm = await ethers.getContractFactory("Tnm");
@@ -29,16 +29,23 @@ describe("THORName Marketplace", () => {
   });
 
   describe("Listing", () => {
-    it("should allow a user to list a THORName for sale", async () => {
-      const id = 1;
-      const name = "mythorname.eth";
-      const category = "category";
-      const image = "image";
-      const cost = tokens(100);
-      const rating = 5;
-      const stock = 10;
-      await tnm.list(id, name, category, image, cost, rating, stock);
-      const product = await tnm.products(id);
+    let transaction;
+
+    beforeEach(async () => {
+      transaction = await tnm.connect(deployer).list(
+        1,
+        "mythorname.thor",
+        "category",
+        "image",
+        tokens(100),
+        5,
+        10
+      );
+      await transaction.wait();
+    });
+    it("Returns product attributes", async () => {
+      const product = await tnm.products(1);
+      expect(product.id).to.equal(1);
     });
   });
 

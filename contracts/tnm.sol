@@ -4,10 +4,6 @@ pragma solidity ^0.8.9;
 contract Tnm {
     address public owner;
 
-    constructor() {
-        owner = msg.sender;
-    }
-
     // List products
     struct Product {
         uint256 id;
@@ -21,6 +17,10 @@ contract Tnm {
 
     mapping(uint256 => Product) public products;
     uint256 public productCount;
+
+    constructor() {
+        owner = msg.sender;
+    }
 
     function list(
         uint256 _id,
@@ -45,7 +45,9 @@ contract Tnm {
 
         // Add product to blockchain
         products[_id] = product; 
+
+        // Buy products
+
+
     }
-
-
 }
