@@ -18,6 +18,24 @@ contract Tnm {
     mapping(uint256 => Product) public products;
     uint256 public productCount;
 
+    event ProductListed(
+        uint256 id,
+        string name,
+        string category,
+        string image,
+        uint256 cost,
+        uint256 rating,
+        uint256 stock
+    );
+
+    // check that  sender is owner of contract.
+    // Apply this to the function: public onlyOwner {}
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _; // This represents the function body. 
+        // So the require statement must execute before the function body in this case.
+    }
+
     constructor() {
         owner = msg.sender;
     }
@@ -30,7 +48,12 @@ contract Tnm {
         uint256 _cost,
         uint256 _rating,
         uint256 _stock
-        ) public {
+        ) public onlyOwner { 
+
+        // Require a valid name
+        require(bytes(_name).length > 0);
+        // Require sender is equal to owner
+        require(msg.sender == owner);
 
         // Create product structure
         Product memory product = Product(
@@ -46,8 +69,16 @@ contract Tnm {
         // Add product to blockchain
         products[_id] = product; 
 
-        // Buy products
-
+        // Emit an event for tracking on the blockchain
+        emit ProductListed(
+            _id,
+            _name,
+            _category,
+            _image,
+            _cost,
+            _rating,
+            _stock
+        );
 
     }
 }
