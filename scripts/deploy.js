@@ -12,7 +12,14 @@ const tokens = (n) => {
 }
 
 async function main() {
+      // get first account from the list
+      [deployer, buyer] = await ethers.getSigners();
+      // deploy contract
+      const Tnm = await hre.ethers.getContractFactory("Tnm");
+      const tnm = await Tnm.deploy();
+      await tnm.deployed(); // wait for contract deployment before proceeding
 
+      console.log("TNM deployed to:", tnm.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
