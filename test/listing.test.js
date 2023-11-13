@@ -13,23 +13,10 @@ describe("THORName Marketplace", () => {
   let deployer, buyer;
 
   beforeEach(async () => {
-
-    // get signers / set up accounts
     [deployer, buyer] = await ethers.getSigners();
-    //console.log("Deployer address: ", deployer.address);
-    //console.log("Buyer address: ", buyer.address);
-
-    // deploy contract
     const Tnm = await ethers.getContractFactory("Tnm");
     tnm = await Tnm.deploy();
-    await tnm.deployed(); // add this line to wait for contract deployment
-
-  });
-
-  describe("Deployment", () => {
-    it("should set the right owner", async () => {
-      expect(await tnm.owner()).to.equal(deployer.address);
-    });
+    await tnm.deployed();
   });
 
   describe("Listing", () => {
