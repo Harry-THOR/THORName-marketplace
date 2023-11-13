@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Nice",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "1",
+      "rating": 3,
+      "stock": 1
+    },
+    {
+      "id": 2,
+      "name": "ChadZaddy",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "69",
+      "rating": 5,
+      "stock": 1
+    },
+    {
+      "id": 3,
+      "name": "Bruce",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "0.00001",
+      "rating": 5,
+      "stock": 1
+    },
+    {
+      "id": 4,
+      "name": "Harry",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "10000",
+      "rating": 5,
+      "stock": 1
+    },
+    {
+      "id": 5,
+      "name": "Lemon",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "0.50",
+      "rating": 4,
+      "stock": 1
+    },
+    {
+      "id": 6,
+      "name": "SBF",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "144.25",
+      "rating": 2,
+      "stock": 0
+    },
+    {
+      "id": 7,
+      "name": "Mod Ash",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "1.05",
+      "rating": 5,
+      "stock": 1
+    },
+    {
+      "id": 8,
+      "name": "Satoshi Nakamoto",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "10",
+      "rating": 5,
+      "stock": 0
+    },
+    {
+      "id": 9,
+      "name": "Adam Cuckrane",
+      "category": "THORNames",
+      "image": "https://raw.githubusercontent.com/thorchain/Resources/master/logos/png/Thorchain_icon_square.png",
+      "price": "0.15",
+      "rating": 2,
+      "stock": 1
+    }
+  ]
+}
