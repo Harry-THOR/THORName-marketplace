@@ -5,7 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat")
-const { items } = require("../src/thornames.json")
+const { names } = require("../src/thornames.json")
 
 const tokens = (n) => {
   return ethers.utils.parseUnits(n.toString(), 'ether')
@@ -13,16 +13,30 @@ const tokens = (n) => {
 
 async function main() {
       // get first account from the list
-      [deployer, buyer] = await ethers.getSigners();
+      [deployer, buyer] = await ethers.getSigners()
       // deploy contract
-      const Tnm = await hre.ethers.getContractFactory("Tnm");
-      const tnm = await Tnm.deploy();
-      await tnm.deployed(); // wait for contract deployment before proceeding
+      const Tnm = await hre.ethers.getContractFactory("Tnm")
+      const tnm = await Tnm.deploy()
+      await tnm.deployed() // wait for contract deployment before proceeding
 
-      console.log("TNM deployed to:", tnm.address);
+      console.log("TNM deployed to:", tnm.address)
 
-      // List items
-      const itemManager = await hre.ethers.getContractFactory("ItemManager");
+      // List names
+      for (let i = 0; i < names.length; i++) {
+        const transaction = await tnm.connect(deployer).list(
+          names[i].id, // returns values from thornames.json
+          names[i].name,
+          names[i].category,
+          names[i].image,
+          tokens(names[i].price),
+          names[i].rating,
+          names[i].stock
+        )
+
+        await transaction.wait()
+
+        console.log(`Name ${names[i].name} listed!`)
+      }
 }
 
 // We recommend this pattern to be able to use async/await everywhere
