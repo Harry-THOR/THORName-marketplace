@@ -16,7 +16,11 @@ function App() {
   const [provider, setProvider] = useState(null)
   const [tnm, setTnm] = useState(null)
   const [account, setAccount] = useState(null)
-  const [thornames, setTHORNames] = useState([])
+  const [thornames, setThornames] = useState([null])
+
+  const togglePop = () => {
+    console.log('togglePop')
+  }
 
   const loadBlockchainData = async () => {
     // Connect to blockchain
@@ -45,9 +49,8 @@ function App() {
 
     // Display all items in thornames category
     const thornames = products.filter((product) => product.category === 'THORNames')
-    setTHORNames(thornames)
+    setThornames(thornames)
     //console.log(thornames)
-
 
   }
 
@@ -61,7 +64,15 @@ function App() {
 
       <Navigation account={account} setAccount={setAccount} />
 
-      <h2>Welcome to THORName Marketplace</h2>
+      <h2 id="buy">Buy</h2>
+
+      {/* If THORNames are loaded, show them in front end */}
+      {thornames[0] !== null && (
+        <Section title={'THORNames'} products={thornames} togglePop={togglePop}> </Section>
+      )}
+
+
+      <h2 id="sell">Sell</h2> 
 
     </div>
   );
