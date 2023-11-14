@@ -13,6 +13,18 @@ import TNM from './abis/tnm.json'
 import config from './config.json'
 
 function App() {
+  const [account, setAccount] = useState('')
+
+  const loadBlockchainData = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = ethers.utils.getAddress(accounts[0])
+    setAccount(account) 
+  }
+
+  // useEffect is a React hook that runs once when the component loads
+  useEffect(() => {
+    loadBlockchainData()
+  }, [])
 
   return (
     <div>
