@@ -7,15 +7,47 @@ import Section from './components/Section'
 import Product from './components/Product'
 
 // ABIs
-import TNM from './abis/tnm.json'
+import tnmABI from './abis/tnm.json'
 
 // Config
 import config from './config.json'
 
 function App() {
-  const [account, setAccount] = useState('')
+  const [provider, setProvider] = useState(null)
+  const [tnm, setTnm] = useState(null)
+  const [account, setAccount] = useState(null)
+  const [thornames, setTHORNames] = useState([])
 
   const loadBlockchainData = async () => {
+    // Connect to blockchain
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    setProvider(provider)
+
+    const network = await provider.getNetwork()
+    //console.log('Network:', network)
+
+    // Get a javascript version of the smart contract
+    const tnm = new ethers.Contract(
+      config[network.chainId].tnm.address,
+      tnmABI, 
+      provider
+    )
+    setTnm(tnm)
+
+    // Load names
+    const products = []
+    
+    for(var i = 1; i < 10; i++) { // mapping id starts at 1
+      const product = await tnm.products(i)
+      
+      products.push(product)
+    }
+
+    // Display all items in thornames category
+    const thornames = products.filter((product) => product.category === 'THORNames')
+    setTHORNames(thornames)
+    //console.log(thornames)
+
 
   }
 

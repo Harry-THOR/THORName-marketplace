@@ -6,7 +6,7 @@ import Rating from './Rating'
 
 import close from '../assets/close.svg'
 
-const Product = ({ item, provider, account, TNM, togglePop }) => {
+const Product = ({ item, provider, account, tnm, togglePop }) => {
 
   return (
     <div className="product">

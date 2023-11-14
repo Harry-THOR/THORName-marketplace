@@ -5,7 +5,7 @@
 // will compile your contracts, add the Hardhat Runtime Environment's members to the
 // global scope, and execute the script.
 const hre = require("hardhat")
-const { names } = require("../src/thornames.json")
+const { products } = require("../src/thornames.json")
 
 const tokens = (n) => {
   return ethers.utils.parseUnits(n.toString(), 'ether')
@@ -22,20 +22,20 @@ async function main() {
       console.log("TNM deployed to:", tnm.address)
 
       // List names
-      for (let i = 0; i < names.length; i++) {
+      for (let i = 0; i < products.length; i++) {
         const transaction = await tnm.connect(deployer).list(
-          names[i].id, // returns values from thornames.json
-          names[i].name,
-          names[i].category,
-          names[i].image,
-          tokens(names[i].price),
-          names[i].rating,
-          names[i].stock
+          products[i].id, // returns values from thornames.json
+          products[i].name,
+          products[i].category,
+          products[i].image,
+          tokens(products[i].price),
+          products[i].rating,
+          products[i].stock
         )
 
         await transaction.wait()
 
-        console.log(`Name ${names[i].name} listed!`)
+        console.log(`Name ${products[i].name} listed!`)
       }
 }
 
