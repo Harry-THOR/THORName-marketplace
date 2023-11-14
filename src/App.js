@@ -16,9 +16,7 @@ function App() {
   const [account, setAccount] = useState('')
 
   const loadBlockchainData = async () => {
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const account = ethers.utils.getAddress(accounts[0])
-    setAccount(account) 
+
   }
 
   // useEffect is a React hook that runs once when the component loads
@@ -28,6 +26,8 @@ function App() {
 
   return (
     <div>
+
+      <Navigation account={account} setAccount={setAccount} />
 
       <h2>Welcome to THORName Marketplace</h2>
 
