@@ -17,9 +17,12 @@ function App() {
   const [tnm, setTnm] = useState(null)
   const [account, setAccount] = useState(null)
   const [thornames, setThornames] = useState([null])
+  const [product, setProduct] = useState({})
+  const [toggle, setToggle] = useState(false)
 
-  const togglePop = () => {
-    console.log('togglePop')
+  const togglePop = (product) => {
+    setProduct(product)
+    toggle ? setToggle(false) : setToggle(true)
   }
 
   const loadBlockchainData = async () => {
@@ -51,7 +54,6 @@ function App() {
     const thornames = products.filter((product) => product.category === 'THORNames')
     setThornames(thornames)
     //console.log(thornames)
-
   }
 
   // useEffect is a React hook that runs once when the component loads
@@ -73,6 +75,10 @@ function App() {
 
 
       <h2 id="sell">Sell</h2> 
+
+      {toggle && (
+        <Product product={product} provider={provider} account={account} tnm={tnm} togglePop={togglePop} />
+      )}
 
     </div>
   );
