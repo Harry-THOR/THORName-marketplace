@@ -11,7 +11,9 @@ const Product = ({ product, provider, account, tnm, togglePop }) => {
   const [order, setOrder] = useState(null)
 
   const buyHandler = async () => {
-    console.log("buying")
+    const signer = await provider.getSigner()
+    let transaction = tnm.connect(signer).buy(product.id, { value: product.cost })
+    await transaction.wait()
   }
 
   return (
