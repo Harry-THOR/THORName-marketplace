@@ -3,18 +3,46 @@ import { ethers } from 'ethers'
 
 // Components
 import Rating from './Rating'
-
 import close from '../assets/close.svg'
 
 const Product = ({ product, provider, account, tnm, togglePop }) => { 
 
   const [order, setOrder] = useState(null)
+  const [hasBought, setHasBought] = useState(false)
 
+  const fetchDetails = async () => {
+    try {
+      const events = await tnm.queryFilter("Buy");
+      const orders = events.filter(
+        (event) => event.args.buyer === account && event.args.productId.toString() === product.id.toString()
+      );
+  
+      if (orders.length === 0) return;
+  
+      const order = await tnm.orders(account, orders[0].args.orderId);
+      setOrder(order);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   const buyHandler = async () => {
-    const signer = await provider.getSigner()
-    let transaction = tnm.connect(signer).buy(product.id, { value: product.cost })
-    await transaction.wait()
-  }
+    try {
+      const signer = await provider.getSigner();
+  
+      // Buy product
+      let transaction = await tnm.connect(signer).buy(product.id, { value: product.cost });
+      await transaction.wait();
+  
+      setHasBought(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDetails()
+  }, [hasBought])
 
   return (
     <div className="product">
